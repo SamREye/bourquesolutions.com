@@ -19,11 +19,47 @@ const serviceCards = [
   },
 ];
 
-const capabilities = [
-  'AI-powered scheduling and booking systems',
-  'Workflow automation for repetitive admin tasks',
-  'Document organization and searchable knowledge systems',
-  'Operational dashboards and decision-support tools',
+const practicalExamples = [
+  {
+    title: 'AI Assistants for Customer Support',
+    description:
+      'Help answer common customer questions faster, improve response times, and keep support more consistent across busy periods.',
+  },
+  {
+    title: 'Automated Email Marketing',
+    description:
+      'Support regular outreach, follow-up campaigns, and customer updates without relying on manual email preparation every time.',
+  },
+  {
+    title: 'Data Analytics for Decision Making',
+    description:
+      'Turn business data into clearer reporting and insights that help owners make more informed operational and growth decisions.',
+  },
+  {
+    title: 'Social Media Management',
+    description:
+      'Assist with planning, drafting, and organizing content so marketing activity stays active and more manageable week to week.',
+  },
+  {
+    title: 'Predictive Analytics for Inventory Management',
+    description:
+      'Support better stock planning by identifying patterns in demand and helping reduce over-ordering or unexpected shortages.',
+  },
+  {
+    title: 'Automated Bookkeeping and Accounting',
+    description:
+      'Reduce repetitive administrative work by helping organize records, track routine entries, and improve day-to-day financial visibility.',
+  },
+  {
+    title: 'HR and Recruitment Assistance',
+    description:
+      'Help screen applications, organize hiring workflows, and simplify repetitive recruiting tasks so teams can focus on the right conversations.',
+  },
+  {
+    title: 'Personalized Customer Recommendations',
+    description:
+      'Use customer behavior and purchase patterns to support more relevant offers, follow-up, and service recommendations.',
+  },
 ];
 
 export default function Home() {
@@ -56,7 +92,6 @@ export default function Home() {
         <nav className="nav">
           <a href="#services">Services</a>
           <a href="#about">Who We Are</a>
-          <a href="#capabilities">AI Capabilities</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -165,23 +200,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" id="capabilities">
-        <div className="section-heading">
-          <p className="eyebrow">AI Capabilities</p>
-          <h3>Examples of what practical AI can look like.</h3>
-          <p className="section-note">This section is designed to expand as tools, examples, and case studies are added.</p>
-        </div>
-
-        <div className="cards capability-grid">
-          {capabilities.map((capability) => (
-            <article key={capability} className="content-card capability-card">
-              <span className="capability-index">Example</span>
-              <p>{capability}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="section">
         <div className="network-banner">
           <div>
@@ -197,19 +215,17 @@ export default function Home() {
 
       <section className="section future-section">
         <div className="section-heading">
-          <p className="eyebrow">Future Additions</p>
-          <h3>Room to grow as the business story develops.</h3>
+          <p className="eyebrow">Practical Examples</p>
+          <h3>Common ways businesses can put AI to work.</h3>
         </div>
 
-        <div className="cards two-up">
-          <article className="content-card placeholder-card">
-            <h4>Case Studies</h4>
-            <p>Reserved for future examples of how advisory support, AI tools, or process improvements created measurable value.</p>
-          </article>
-          <article className="content-card placeholder-card">
-            <h4>Testimonials</h4>
-            <p>Reserved for client feedback that reinforces trust, practical outcomes, and local business credibility.</p>
-          </article>
+        <div className="cards examples-grid">
+          {practicalExamples.map((example) => (
+            <article key={example.title} className="content-card placeholder-card">
+              <h4>{example.title}</h4>
+              <p>{example.description}</p>
+            </article>
+          ))}
         </div>
       </section>
     </main>
