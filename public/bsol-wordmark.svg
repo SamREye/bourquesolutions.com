@@ -1,0 +1,45 @@
+<svg width="520" height="140" viewBox="240 20 520 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfd6df" />
+      <stop offset="50%" stop-color="#cfd6df" />
+      <stop offset="100%" stop-color="#8f99a6" />
+    </linearGradient>
+
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7e3a7" />
+      <stop offset="50%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#8f6a16" />
+    </linearGradient>
+  </defs>
+
+  <text
+    x="500"
+    y="100"
+    text-anchor="middle"
+    font-family="Avenir Next, Gotham, Montserrat, Arial, sans-serif"
+    font-size="88"
+    font-weight="600"
+    letter-spacing="2"
+    fill="url(#silver)"
+  >
+    BOURQUE
+  </text>
+
+  <rect x="300" y="130" width="70" height="4" fill="url(#gold)" />
+
+  <text
+    x="504"
+    y="145"
+    text-anchor="middle"
+    font-family="Avenir Next, Gotham, Montserrat, Arial, sans-serif"
+    font-size="34"
+    font-weight="600"
+    letter-spacing="8"
+    fill="url(#gold)"
+  >
+    SOLUTIONS
+  </text>
+
+  <rect x="630" y="130" width="70" height="4" fill="url(#gold)" />
+</svg>
