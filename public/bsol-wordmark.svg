@@ -1,9 +1,22 @@
 <svg width="520" height="140" viewBox="240 20 520 140" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="silver" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#cfd6df" />
-      <stop offset="50%" stop-color="#cfd6df" />
-      <stop offset="100%" stop-color="#8f99a6" />
+      <stop offset="0%" stop-color="#eef2f6" />
+      <stop offset="14%" stop-color="#bcc4ce" />
+      <stop offset="32%" stop-color="#f7fafc" />
+      <stop offset="46%" stop-color="#d7dde4" />
+      <stop offset="62%" stop-color="#aab2bd" />
+      <stop offset="80%" stop-color="#cfd6de" />
+      <stop offset="100%" stop-color="#727b87" />
+    </linearGradient>
+
+    <linearGradient id="silver-highlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="18%" stop-color="#ffffff" stop-opacity="0.1" />
+      <stop offset="28%" stop-color="#ffffff" stop-opacity="0.72" />
+      <stop offset="36%" stop-color="#ffffff" stop-opacity="0.2" />
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
     </linearGradient>
 
     <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
@@ -15,6 +28,20 @@
 
   <text
     x="500"
+    y="103"
+    text-anchor="middle"
+    font-family="Avenir Next, Gotham, Montserrat, Arial, sans-serif"
+    font-size="88"
+    font-weight="600"
+    letter-spacing="2"
+    fill="#4f5863"
+    opacity="0.22"
+  >
+    BOURQUE
+  </text>
+
+  <text
+    x="500"
     y="100"
     text-anchor="middle"
     font-family="Avenir Next, Gotham, Montserrat, Arial, sans-serif"
@@ -22,6 +49,20 @@
     font-weight="600"
     letter-spacing="2"
     fill="url(#silver)"
+  >
+    BOURQUE
+  </text>
+
+  <text
+    x="500"
+    y="100"
+    text-anchor="middle"
+    font-family="Avenir Next, Gotham, Montserrat, Arial, sans-serif"
+    font-size="88"
+    font-weight="600"
+    letter-spacing="2"
+    fill="url(#silver-highlight)"
+    opacity="0.34"
   >
     BOURQUE
   </text>
