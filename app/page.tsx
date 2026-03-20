@@ -92,7 +92,7 @@ export default function Home() {
         <nav className="nav">
           <a href="#services">Services</a>
           <a href="#about">Who We Are</a>
-          <a href="#contact">Contact</a>
+          <a href="mailto:andre@bourquesolutions.com">Contact</a>
         </nav>
       </header>
 
