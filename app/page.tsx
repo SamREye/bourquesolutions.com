@@ -1,64 +1,45 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const serviceCards = [
+const advisorySteps = [
   {
-    title: 'AI Adoption Advisory',
+    title: 'Find the real bottleneck first',
     description:
-      'Practical guidance to help businesses choose and implement AI tools that improve workflow, organization, and day-to-day efficiency.',
+      'Start with the repetitive admin, missed follow-up, and reporting gaps that are slowing the business down before buying more software.',
   },
   {
-    title: 'Procurement & Defense Supply Consulting',
+    title: 'Choose tools that fit the team',
     description:
-      'Support navigating procurement processes, supply opportunities, and defense-related contract pathways with clarity and structure.',
+      'Focus on practical systems for communication, workflow, sales support, and operations instead of broad AI experimentation.',
   },
   {
-    title: 'Export & Logistics Consulting',
+    title: 'Roll out in manageable stages',
     description:
-      'Advisory for international shipping, export coordination, and supply-chain planning so growth opportunities stay manageable.',
+      'Make one useful change at a time so owners can see value quickly without disrupting how the business already runs.',
   },
 ];
 
-const practicalExamples = [
+const proofPoints = [
+  'Founder-led advisory with direct guidance from Andre Bourque',
+  'Clear next-step recommendations instead of open-ended technical scope',
+  'Growth Assessment available for businesses that need a practical starting point',
+];
+
+const opportunityAreas = [
   {
-    title: 'AI Assistants for Customer Support',
+    title: 'Procurement readiness',
     description:
-      'Help answer common customer questions faster, improve response times, and keep support more consistent across busy periods.',
+      'Prepare internal process, documentation, and business positioning for public and private-sector opportunities.',
   },
   {
-    title: 'Automated Email Marketing',
+    title: 'Defense supply pathways',
     description:
-      'Support regular outreach, follow-up campaigns, and customer updates without relying on manual email preparation every time.',
+      'Get practical guidance on navigating defense-related supply and contract opportunities with more structure.',
   },
   {
-    title: 'Data Analytics for Decision Making',
+    title: 'Export and logistics planning',
     description:
-      'Turn business data into clearer reporting and insights that help owners make more informed operational and growth decisions.',
-  },
-  {
-    title: 'Social Media Management',
-    description:
-      'Assist with planning, drafting, and organizing content so marketing activity stays active and more manageable week to week.',
-  },
-  {
-    title: 'Predictive Analytics for Inventory Management',
-    description:
-      'Support better stock planning by identifying patterns in demand and helping reduce over-ordering or unexpected shortages.',
-  },
-  {
-    title: 'Automated Bookkeeping and Accounting',
-    description:
-      'Reduce repetitive administrative work by helping organize records, track routine entries, and improve day-to-day financial visibility.',
-  },
-  {
-    title: 'HR and Recruitment Assistance',
-    description:
-      'Help screen applications, organize hiring workflows, and simplify repetitive recruiting tasks so teams can focus on the right conversations.',
-  },
-  {
-    title: 'Personalized Customer Recommendations',
-    description:
-      'Use customer behavior and purchase patterns to support more relevant offers, follow-up, and service recommendations.',
+      'Strengthen shipping, coordination, and supply-chain planning as growth moves beyond the local market.',
   },
 ];
 
@@ -68,190 +49,188 @@ export default function Home() {
       <div className="site-chrome" />
 
       <header className="topbar">
-        <Link href="/" className="brand-block" aria-label="Bourque Solutions home">
-          <Image
-            src="/bsol-logo.png"
-            alt="Bourque Solutions logo"
-            width={88}
-            height={88}
-            className="brand-logo"
-            priority
-          />
-          <h1 className="brand-heading">
+        <div className="container topbar-inner">
+          <Link href="/" className="brand-block" aria-label="Bourque Solutions home">
             <Image
-              src="/bsol-wordmark.svg"
-              alt="Bourque Solutions"
-              width={1000}
-              height={240}
-              className="brand-wordmark"
+              src="/bsol-logo.png"
+              alt="Bourque Solutions logo"
+              width={88}
+              height={88}
+              className="brand-logo"
               priority
             />
-          </h1>
-        </Link>
-
-        <nav className="nav">
-          <Link href="/growth-assessment" className="nav-cta">
-            Growth Assessment
+            <span className="brand-heading">
+              <Image
+                src="/bsol-wordmark.svg"
+                alt="Bourque Solutions"
+                width={1000}
+                height={240}
+                className="brand-wordmark"
+                priority
+              />
+            </span>
           </Link>
-          <a href="#services">Services</a>
-          <a href="#about">Who We Are</a>
-          <a href="mailto:andre@bourquesolutions.com">Contact</a>
-        </nav>
+
+          <nav className="nav" aria-label="Primary">
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <Link href="/growth-assessment" className="nav-cta">
+              Growth Assessment
+            </Link>
+          </nav>
+        </div>
       </header>
 
-      <section className="hero-panel">
-        <div className="hero-copy">
-          <p className="eyebrow">Practical AI and business advisory</p>
-          <h2>
-            Practical AI and business advisory for growing companies.
-          </h2>
-          <p className="lead">
-            AI is evolving quickly, and for many local businesses it feels like too much, too fast. Bourque
-            Solutions translates that complexity into straightforward next steps, helping owners apply useful
-            tools that improve efficiency, organization, and decision-making without adding confusion.
-          </p>
+      <section className="hero-panel" id="about">
+        <div className="container hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow">Practical AI guidance for growing businesses</p>
+            <h1>Clear next steps for owners who want AI to be useful.</h1>
+            <p className="hero-intro">
+              Bourque Solutions helps local businesses turn AI from background noise into better follow-up,
+              smoother operations, and more confident day-to-day decisions.
+            </p>
 
-          <div className="tag-row" aria-label="Core focus areas">
-            <span>AI adoption guidance</span>
-            <span>Procurement advisory</span>
-            <span>Defense supply contracts</span>
-            <span>Export and logistics consulting</span>
-            <span>CyberSecure grant-aligned support</span>
-          </div>
+            <div className="hero-actions">
+              <a href="mailto:andre@bourquesolutions.com" className="primary-button">
+                Book a Call
+              </a>
+              <Link href="/growth-assessment" className="secondary-button">
+                Start Growth Assessment
+              </Link>
+            </div>
 
-          <div className="hero-actions">
-            <Link href="/growth-assessment" className="primary-button">
-              Start Growth Assessment
-            </Link>
-            <a href="mailto:andre@bourquesolutions.com" className="secondary-button">
-              Book a Call
-            </a>
-          </div>
-        </div>
-
-        <aside className="hero-side">
-          <div className="insight-card">
-            <p className="eyebrow">How we help</p>
-            <ul>
-              <li>Clarify where AI fits in the business</li>
-              <li>Prioritize practical tools over hype</li>
-              <li>Support implementation in manageable stages</li>
-              <li>Connect local businesses to larger opportunities</li>
+            <ul className="hero-points" aria-label="What Bourque Solutions offers">
+              <li>Operational clarity before tool selection</li>
+              <li>Founder-led advisory, not generic implementation churn</li>
+              <li>Practical rollout built for small and growing teams</li>
             </ul>
           </div>
-        </aside>
+
+          <div className="hero-portrait">
+            <div className="portrait-frame">
+              <Image
+                src="/andre-bourque.jpg"
+                alt="Andre Bourque"
+                width={540}
+                height={720}
+                className="portrait-photo"
+                priority
+              />
+            </div>
+
+            <div className="portrait-caption">
+              <p className="eyebrow">Founder-led advisory</p>
+              <p>
+                Andre Bourque works directly with owners to simplify new tools, sharpen priorities, and
+                build a more workable plan for growth.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="section-grid">
-        <article className="content-card assessment-card">
-          <p className="eyebrow">Growth Assessment</p>
-          <h3>See where the business is losing growth before you invest in fixes.</h3>
-          <p>
-            Answer a short set of questions, get one recommended next step, and see whether the work may fit
-            within CyberSecure-aligned funding support.
-          </p>
-          <div className="card-actions">
-            <Link href="/growth-assessment" className="inline-card-link">
-              Take the Assessment
+      <section className="section section-support" id="services">
+        <div className="container support-grid">
+          <div className="support-intro">
+            <p className="eyebrow">How We Help</p>
+            <h2>Start with the pressure points that keep stealing time.</h2>
+            <p>
+              The work begins by identifying where the business is getting stuck, then narrowing the next
+              move to something the team can actually adopt and use.
+            </p>
+            <Link href="/growth-assessment" className="text-link">
+              Explore the assessment
             </Link>
           </div>
-        </article>
 
-        <article className="content-card emphasis-card">
-          <p className="eyebrow">A simple place to begin</p>
-          <h3>Technology should make the business easier to run.</h3>
-          <p>
-            Early AI adoption does not need to mean major disruption. Bourque Solutions focuses on realistic
-            applications such as scheduling, workflow automation, document handling, and operational support
-            so businesses can start with what is useful now and expand over time.
-          </p>
-        </article>
-
-        <article className="content-card opportunity-card">
-          <p className="eyebrow">Opportunities</p>
-          <h3>Built for growth beyond the day-to-day.</h3>
-          <p>
-            Alongside AI adoption, Bourque Solutions helps businesses prepare for procurement, supply, export,
-            and logistics opportunities with a practical lens on process and readiness.
-          </p>
-        </article>
-      </section>
-
-      <section className="section" id="services">
-        <div className="section-heading">
-          <p className="eyebrow">Services</p>
-          <h3>Focused advisory for businesses that want clear direction.</h3>
-        </div>
-
-        <div className="cards three-up">
-          {serviceCards.map((service) => (
-            <article key={service.title} className="content-card service-card">
-              <h4>{service.title}</h4>
-              <p>{service.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section about-section" id="about">
-        <div className="section-heading">
-          <p className="eyebrow">Who We Are</p>
-          <h3>A real advisor behind the work.</h3>
-        </div>
-
-        <div className="about-grid">
-          <div className="portrait-placeholder">
-            <Image
-              src="/andre-bourque.jpg"
-              alt="André Bourque"
-              width={271}
-              height={271}
-              className="portrait-photo"
-              priority
-            />
+          <div className="support-list">
+            {advisorySteps.map((step, index) => (
+              <article key={step.title} className="support-item">
+                <span className="support-index">0{index + 1}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </article>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <article className="content-card bio-card" id="contact">
-            <h4>André Bourque</h4>
+      <section className="section section-proof">
+        <div className="container proof-grid">
+          <article className="proof-copy">
+            <p className="eyebrow">Why businesses call</p>
+            <h2>Advice first. Better systems second.</h2>
             <p>
-              Bourque Solutions is positioned as a practical guide for businesses that want to modernize
-              operations, understand emerging tools, and pursue new commercial opportunities without getting
-              lost in technical language.
-            </p>
-            <p>
-              The focus is trust, clarity, and business value: identifying solutions that make operations more
-              efficient while helping companies navigate procurement, supply, export, and related growth paths.
+              Bourque Solutions is built for owners who want a clear recommendation, a sensible sequence,
+              and a practical view of where AI can improve the business right now.
             </p>
           </article>
-        </div>
-      </section>
 
-      <section className="section">
-        <div className="network-banner">
-          <div>
-            <p className="eyebrow">AI Adoption Center</p>
-            <h3>Bourque Solutions is positioned as a regional partner in the AI Adoption Center network.</h3>
-          </div>
-          <p>
-            That relationship gives businesses a clear local point of contact while also connecting them to a
-            broader network of advanced solutions and global collaboration when needed.
-          </p>
-        </div>
-      </section>
+          <div className="proof-stack">
+            <div className="proof-list">
+              {proofPoints.map((point) => (
+                <p key={point}>{point}</p>
+              ))}
+            </div>
 
-      <section className="section future-section">
-        <div className="section-heading">
-          <p className="eyebrow">Practical Examples</p>
-          <h3>Common ways businesses can put AI to work.</h3>
-        </div>
-
-        <div className="cards examples-grid">
-          {practicalExamples.map((example) => (
-            <article key={example.title} className="content-card placeholder-card">
-              <h4>{example.title}</h4>
-              <p>{example.description}</p>
+            <article className="network-note">
+              <p className="eyebrow">AI Adoption Center</p>
+              <h3>Connected to a wider AI Adoption Center network when more advanced support is needed.</h3>
+              <p>
+                Businesses get a clear local point of contact first, with access to a broader network of
+                expertise when the scope calls for it.
+              </p>
             </article>
-          ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-opportunities">
+        <div className="container opportunities-grid">
+          <div className="opportunities-copy">
+            <p className="eyebrow">Additional Growth Support</p>
+            <h2>When growth expands beyond internal operations.</h2>
+            <p>
+              Procurement, defense supply, export, and logistics support remain part of the offer, but as
+              the next layer after operational clarity and stronger internal systems.
+            </p>
+          </div>
+
+          <div className="opportunities-list">
+            {opportunityAreas.map((area) => (
+              <article key={area.title} className="opportunity-item">
+                <h3>{area.title}</h3>
+                <p>{area.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-cta" id="contact">
+        <div className="container cta-panel">
+          <div className="cta-copy">
+            <p className="eyebrow">Next Step</p>
+            <h2>Book a working session and leave with a clearer direction.</h2>
+            <p>
+              Start with a call to discuss where AI, process changes, or growth planning can create the most
+              value first.
+            </p>
+          </div>
+
+          <div className="cta-actions">
+            <a href="mailto:andre@bourquesolutions.com" className="primary-button">
+              Book a Call
+            </a>
+            <Link href="/growth-assessment" className="secondary-button secondary-button-dark">
+              Start Growth Assessment
+            </Link>
+            <p className="cta-note">andre@bourquesolutions.com</p>
+          </div>
         </div>
       </section>
     </main>

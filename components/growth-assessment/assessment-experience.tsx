@@ -887,7 +887,7 @@ export function AssessmentExperience() {
                     <input
                       value={draft.businessName}
                       onChange={(event) => updateDraft('businessName', event.target.value)}
-                      placeholder="Bourque Solutions"
+                      placeholder="Your Business Name"
                       className="w-full rounded-2xl border border-[#d7d8dc] bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-brass"
                     />
                   </label>
