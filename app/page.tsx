@@ -90,6 +90,9 @@ export default function Home() {
         </Link>
 
         <nav className="nav">
+          <Link href="/growth-assessment" className="nav-cta">
+            Growth Assessment
+          </Link>
           <a href="#services">Services</a>
           <a href="#about">Who We Are</a>
           <a href="mailto:andre@bourquesolutions.com">Contact</a>
@@ -115,6 +118,15 @@ export default function Home() {
             <span>Export and logistics consulting</span>
             <span>CyberSecure grant-aligned support</span>
           </div>
+
+          <div className="hero-actions">
+            <Link href="/growth-assessment" className="primary-button">
+              Start Growth Assessment
+            </Link>
+            <a href="mailto:andre@bourquesolutions.com" className="secondary-button">
+              Book a Call
+            </a>
+          </div>
         </div>
 
         <aside className="hero-side">
@@ -131,6 +143,20 @@ export default function Home() {
       </section>
 
       <section className="section-grid">
+        <article className="content-card assessment-card">
+          <p className="eyebrow">Growth Assessment</p>
+          <h3>See where the business is losing growth before you invest in fixes.</h3>
+          <p>
+            Answer a short set of questions, get one recommended next step, and see whether the work may fit
+            within CyberSecure-aligned funding support.
+          </p>
+          <div className="card-actions">
+            <Link href="/growth-assessment" className="inline-card-link">
+              Take the Assessment
+            </Link>
+          </div>
+        </article>
+
         <article className="content-card emphasis-card">
           <p className="eyebrow">A simple place to begin</p>
           <h3>Technology should make the business easier to run.</h3>
