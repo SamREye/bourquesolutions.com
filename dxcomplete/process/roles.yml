@@ -1,0 +1,96 @@
+schema: dxcomplete.roles.v0
+status: editable
+notes:
+  - This role model is a working operating model.
+  - One person may hold more than one role, especially in a small team.
+  - Director and Product Lead are folded into Owner. Coder is folded into Engineer. Admin is folded into Operator.
+  - Revise ownership and escalation paths before treating them as policy.
+
+roles:
+  - id: owner
+    name: Owner
+    responsibility: Sets authority, priority, outcome direction, requirements, product validation direction, budget commitment, escalation direction, and formal risk acceptance.
+    likely_owns:
+      - authority
+      - priority
+      - outcomes
+      - requirements
+      - acceptance criteria
+      - product validation direction
+      - budget commitment
+      - formal risk acceptance
+      - escalation
+      - strategic direction
+    folded_responsibilities:
+      - Director authority and escalation
+      - Product Lead outcome definition and validation
+    open_questions:
+      - Which Owner approvals should be explicit checkpoints?
+      - Which requests require Owner review before becoming requirements?
+
+  - id: engineer
+    name: Engineer
+    responsibility: Turns committed requirements into tasks and working changes, either directly or by driving coding-capable tools.
+    likely_owns:
+      - solution approach
+      - task decomposition
+      - implementation
+      - implementation review
+      - technical decisions
+      - Codex-assisted task direction
+    folded_responsibilities:
+      - Coder task implementation
+    open_questions:
+      - Which tasks are eligible for Codex-assisted coding?
+      - What implementation evidence is required before testing?
+
+  - id: tester
+    name: Tester
+    responsibility: Checks completed work against requirements and success criteria.
+    likely_owns:
+      - verification plans
+      - test evidence
+      - defect signals
+      - release quality input
+    open_questions:
+      - Which changes require formal verification evidence?
+
+  - id: operator
+    name: Operator
+    responsibility: Releases, deploys, monitors, and runs the service, including provisioning, administration, users, permissions, settings, and run-side security.
+    likely_owns:
+      - release execution
+      - deployment
+      - monitoring
+      - service health
+      - operational incidents
+      - provisioning
+      - user administration
+      - permission configuration
+      - run-side security
+    folded_responsibilities:
+      - Admin user and permission management
+    open_questions:
+      - Which administration or run-side security changes require change control?
+
+  - id: support_agent
+    name: Support Agent
+    responsibility: Helps users, captures signals, and routes questions, feedback, and issues to the right follow-up.
+    likely_owns:
+      - user issue communication
+      - support tickets
+      - feedback capture
+      - issue routing
+    open_questions:
+      - When does a support ticket become an incident, problem, or requirement?
+
+  - id: end_user
+    name: End User
+    responsibility: Uses the service and provides requests, feedback, corrections, and issue reports.
+    likely_owns:
+      - service use
+      - feedback
+      - issue reports
+      - corrections
+    open_questions:
+      - Which End User signals should become feedback, requirements, incidents, problems, or risks?

@@ -1,0 +1,14 @@
+%% DX Complete change and release control workflow.
+flowchart TD
+  Change[Create Change record] --> Type[Classify standard, normal, or emergency]
+  Type --> Plan[Record change plan]
+  Plan --> Execution[Record execution steps]
+  Execution --> Rollback[Record rollback plan]
+  Rollback --> RiskImpact[Record risk, impact, and downstream impact]
+  RiskImpact --> Notice[Append notice event]
+  Notice --> Veto{Veto recorded?}
+  Veto -->|Yes| VetoEvent[Append veto event]
+  Veto -->|No| Decision[Append decision event]
+  VetoEvent --> Decision
+  Decision --> Release[Prepare release or deployment]
+  Release --> Result[Append result or recovery event with optional Git reference]

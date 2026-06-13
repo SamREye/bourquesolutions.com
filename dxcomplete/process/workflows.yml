@@ -1,0 +1,211 @@
+schema: dxcomplete.workflows.v0
+status: current
+notes:
+  - These workflows are editable templates.
+  - Add, remove, merge, or split workflows when the workspace process changes.
+
+workflows:
+  - id: decision_basis
+    name: Decision basis
+    purpose: Move from user statement to expectations and requirements with enough detail to support useful cost, benefit, risk, confidence, and Weigh outcomes.
+    likely_roles:
+      - Owner
+      - Engineer
+      - Operator
+      - End User
+    steps:
+      - Capture statement in the user's own words and restate the expected result.
+      - Confirm captured wording before recording it on the user's behalf.
+      - Confirm how success will be recognized where possible.
+      - Elicit requirements, dependencies, constraints, and unknowns from expectations.
+      - Make current-state cost context visible where it is relevant and available.
+      - Generate an itemized cost Estimate from the elicited requirement set where cost reasoning is needed.
+      - Capture Benefits where benefit reasoning is needed.
+      - Prepare the decision basis from Estimate, Benefits, risks, review notes, and linked Decisions where useful.
+      - Record a Commitment or Deferral.
+      - Link any separate Decision to the records that informed it.
+      - If committing, move the requirement set into Build and Go Live planning.
+      - If deferring, record the unmet conditions.
+      - Capture useful post-launch observations after delivery where available.
+      - Use available actuals to refine estimates for future projects.
+    rules:
+      - Cost visibility is mandatory.
+      - Complete cost data is not mandatory.
+      - Current-state cost context should be attempted where relevant, but may be unavailable.
+      - Post-launch observations should be captured when useful, but must not block closure.
+      - Transformation, greenfield, and limited-disclosure modes must be supported.
+      - Approval checkpoints reduce risk but should not block progress by themselves.
+      - Moving past an open checkpoint should leave the open risk visible.
+
+  - id: intake_triage
+    name: Intake and triage
+    purpose: Decide whether a signal should become a ticket, statement, requirement, task, risk, decision, change, journal note, or another matching lifecycle concept.
+    likely_roles:
+      - Owner
+      - Support Agent
+      - Operator
+    steps:
+      - Capture signal.
+      - Identify source and urgency.
+      - Route to Owner, Operator, or Support Agent.
+      - Record initial object and links.
+      - Capture open questions.
+
+  - id: product_definition
+    name: Product definition
+    purpose: Translate expectations into requirements before Weigh, then refine requirement detail after Commitment where needed.
+    likely_roles:
+      - Owner
+      - End User
+      - Engineer
+    steps:
+      - Review linked Statement, Estimate, Benefits, and decisions where available.
+      - Review captured statement and expectations.
+      - Prepare requirement and acceptance criteria.
+      - Add Engineer review notes where delivery input should remain visible.
+      - Refine requirement detail after Commitment where needed.
+      - Link source objects.
+      - Identify risks, constraints, and decisions.
+      - Confirm readiness for engineering review.
+
+  - id: engineering_execution
+    name: Engineering execution
+    purpose: Refine committed requirements into tasks and perform implementation work.
+    likely_roles:
+      - Engineer
+    steps:
+      - Review requirement and acceptance criteria.
+      - Review important notes attached to expectations or requirements.
+      - Add requirement detail and decide implementation approach.
+      - Break requirement into tasks.
+      - Assign Engineer tasks and identify Codex-assisted work where useful.
+      - Implement, review, and prepare for testing.
+
+  - id: qa_verification
+    name: QA verification
+    purpose: Verify completed work against requirements and acceptance criteria.
+    likely_roles:
+      - Tester
+      - Engineer
+    steps:
+      - Review requirement and task output.
+      - Plan verification.
+      - Execute checks.
+      - Record evidence and defects.
+      - Recommend pass, fail, or retest.
+
+  - id: product_validation
+    name: Product validation
+    purpose: Decide whether verified work achieves the intended product outcome.
+    likely_roles:
+      - Owner
+      - End User
+    steps:
+      - Review QA evidence.
+      - Validate outcome against product intent.
+      - Capture approval, rejection, or follow-up requirements.
+      - Link validation evidence.
+
+  - id: change_release_control
+    name: Change and release control
+    purpose: Record a discrete service change, including change type, plan, execution, rollback, notice, veto, and result.
+    likely_roles:
+      - Operator
+      - Owner
+      - Engineer
+      - Tester
+    steps:
+      - Record the Change baseline.
+      - Confirm required evidence and notice.
+      - Assess risk, impact, and rollback.
+      - Classify the change as standard, normal, or emergency.
+      - Append notice, veto, decision, result, recovery, note, or revision events as they occur.
+      - Link release or deployment evidence where needed.
+
+  - id: deployment_operations
+    name: Deployment and operations
+    purpose: Deploy and run the service safely.
+    likely_roles:
+      - Operator
+      - Engineer
+      - Support Agent
+    steps:
+      - Prepare deployment.
+      - Execute deployment.
+      - Monitor service health.
+      - Update Environment and Component records when operational inventory changes.
+      - Record deployment evidence.
+      - Route issues to tickets, risks, tasks, changes, decisions, requirements, or journal notes as appropriate.
+
+  - id: operational_registry
+    name: Operational Registry maintenance
+    purpose: Keep the inventory of Environments and Components understandable without turning it into monitoring, diagnostics, secret storage, event history, or a runbook.
+    likely_roles:
+      - Operator
+      - Engineer
+    steps:
+      - Create or update Environment records for named operating contexts.
+      - Create or update Component records for operational items in each Environment.
+      - Record locator details, non-secret identifiers, and secret pointers where useful.
+      - Keep secret pointers as store and key names only; do not store secret values.
+      - Link Components to Changes, Decisions, Risks, or Tasks when those records need the inventory context.
+
+  - id: support_incident_management
+    name: Support and incident management
+    purpose: Handle user-facing issues and service-impacting events, using Incident when a specific occurrence needs response history.
+    likely_roles:
+      - Support Agent
+      - Operator
+      - Owner
+      - Engineer
+    steps:
+      - Capture user or monitoring signal.
+      - Classify as ticket, statement, incident, problem, risk, task, change, decision, requirement, or journal note.
+      - Communicate status to affected users where needed.
+      - Resolve or route.
+      - Link follow-up objects.
+
+  - id: problem_improvement
+    name: Problem and improvement management
+    purpose: Convert recurring or root-cause signals into durable improvements through Problem records and linked follow-up.
+    likely_roles:
+      - Operator
+      - Engineer
+      - Owner
+      - Support Agent
+    steps:
+      - Identify recurring issue or root cause.
+      - Capture the underlying or recurring cause through Problem when incidents or operational evidence support it.
+      - Decide whether improvement requires a Requirement, Task, Risk, Decision, or Change.
+      - Track corrective action.
+      - Capture outcome and evidence.
+
+  - id: risk_control_management
+    name: Risk and control management
+    purpose: Identify risks and define controls or evidence requirements.
+    likely_roles:
+      - Owner
+      - Operator
+      - Tester
+      - Engineer
+    steps:
+      - Identify risk.
+      - Decide owner and impact.
+      - Define control or mitigation.
+      - Link related lifecycle objects.
+      - Review control evidence.
+
+  - id: audit_evidence_capture
+    name: Audit and evidence capture
+    purpose: Preserve evidence for decisions, verification, controls, releases, deployments, and approvals.
+    likely_roles:
+      - Operator
+      - Tester
+      - Engineer
+      - Owner
+    steps:
+      - Identify required evidence.
+      - Capture or link evidence.
+      - Record responsible person and timestamp.
+      - Review completeness.
+      - Preserve for audit or retrospective use.

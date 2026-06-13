@@ -1,0 +1,15 @@
+%% DX Complete engineering execution workflow.
+flowchart TD
+  Requirement[Committed Requirement] --> RequirementDetail[Refine requirement detail]
+  RequirementDetail --> Approach[Engineer decides implementation approach]
+  Approach --> Tasks[Decompose into Tasks]
+  Tasks --> Eligibility{Codex assistance useful?}
+  Eligibility -->|Yes| CodexTask[Engineer task with Codex assistance]
+  Eligibility -->|No| ManualTask[Engineer task]
+  CodexTask --> EngineerReview[Engineer review]
+  ManualTask --> EngineerReview
+  EngineerReview --> Complete{Ready for QA verification?}
+  Complete -->|No| Rework[Rework or clarify]
+  Rework --> Tasks
+  Complete -->|Yes| ReadyForCheck[Ready for verification]
+  ReadyForCheck --> QAHandoff[QA handoff]

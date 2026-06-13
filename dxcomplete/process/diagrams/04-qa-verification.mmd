@@ -1,0 +1,12 @@
+%% DX Complete QA verification workflow.
+flowchart TD
+  QAHandoff[QA handoff] --> ReviewInputs[Review requirement, tasks, and acceptance criteria]
+  ReviewInputs --> Plan[Plan verification]
+  Plan --> Execute[Execute checks]
+  Execute --> Result{Verification result}
+  Result -->|Pass| Evidence[Record QA evidence]
+  Result -->|Fail| Defect[Record defect or follow-up task]
+  Result -->|Unclear| Clarification[Request clarification]
+  Defect --> Engineer[Return to Engineer]
+  Clarification --> OwnerOrEngineer[Owner or Engineer clarification]
+  Evidence --> ProductValidation[Product validation]

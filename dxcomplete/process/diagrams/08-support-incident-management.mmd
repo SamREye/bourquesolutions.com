@@ -1,0 +1,17 @@
+%% DX Complete support and incident management workflow.
+flowchart TD
+  UserSignal[End User signal] --> Ticket[Support Request]
+  Ticket --> Classify{Classify}
+  Classify -->|Question or request| SupportResponse[Support Agent response]
+  Classify -->|Outcome signal| Feedback[Feedback]
+  Classify -->|Service impact| Incident[Create Incident]
+  Classify -->|Recurring issue| Problem[Create Problem]
+  Incident --> Operator[Operator response]
+  Incident --> Problem
+  Operator --> UserComms[Support Agent communicates status]
+  Feedback --> Owner[Owner triage]
+  Problem --> ProblemReview[Risk, Decision, Requirement, Change, or Task review]
+  SupportResponse --> CloseTicket[Close or update ticket]
+  UserComms --> CloseTicket
+  Owner --> CloseTicket
+  ProblemReview --> CloseTicket

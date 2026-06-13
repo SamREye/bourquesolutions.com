@@ -1,0 +1,15 @@
+%% DX Complete problem and improvement workflow.
+flowchart TD
+  Signal[Incident / ticket / repeated service signal] --> Problem[Create Problem]
+  Problem --> Investigate[Append investigation entry]
+  Investigate --> CauseKnown{Cause known?}
+  CauseKnown -->|No| MoreEvidence[Collect more evidence]
+  MoreEvidence --> Investigate
+  CauseKnown -->|Yes| RootCause[Append root-cause or known-error entry]
+  RootCause --> Improvement{Improvement needed?}
+  Improvement -->|Requirement| Requirement[Create Requirement]
+  Improvement -->|Service change| Change[Create Change]
+  Improvement -->|No action| Decision[Record decision]
+  Requirement --> ProductDefinition[Product definition]
+  Change --> ChangeControl[Change and release control]
+  Decision --> Review[Schedule review if needed]

@@ -1,0 +1,14 @@
+%% DX Complete product definition workflow.
+flowchart TD
+  SourceObject[Feedback / Feature Request / Authoritative Request / Recurring issue] --> Clarify[Clarify desired outcome]
+  Clarify --> Statement[Capture User Statement]
+  Statement --> Expectation[Restate Expected Result]
+  Expectation --> Requirement[Requirement]
+  Requirement --> Acceptance[Acceptance criteria]
+  Acceptance --> Constraints[Identify constraints and risks]
+  Constraints --> Review{Ready for engineering review?}
+  Review -->|No| OpenQuestions[Record open questions]
+  OpenQuestions --> Clarify
+  Review -->|Yes| EngineerReview[Engineer review]
+  EngineerReview --> Decision[Record decision if needed]
+  Decision --> RequirementReady[Requirement ready for execution]

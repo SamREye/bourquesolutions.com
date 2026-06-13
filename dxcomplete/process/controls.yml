@@ -1,0 +1,117 @@
+schema: dxcomplete.controls.v0
+status: current
+notes:
+  - Controls are editable workspace process expectations.
+  - Do not treat these as compliance requirements without a workspace-specific decision.
+
+controls:
+  - id: cost_visibility
+    name: Cost visibility
+    purpose: Ensure the workspace elicits enough detail, attempts current-state cost visibility, generates a cost Estimate where cost reasoning is needed, and records Benefits where benefit reasoning is needed.
+    applies_to:
+      - Workspace
+      - Estimate
+      - Benefits
+    evidence:
+      - Elicited needs, dependencies, constraints, and unknowns.
+      - Current-state cost context, including unavailable or undisclosed data notes where applicable.
+      - Estimate with assumptions and cost roll-up.
+      - Benefits with quantified or qualitative benefit items.
+      - Weigh outcome, linked inputs, and remaining concerns.
+    open_questions:
+      - What is enough cost visibility to commit when baseline data is unavailable?
+
+  - id: requirement_acceptance_criteria
+    name: Requirement acceptance criteria
+    purpose: Ensure each requirement has enough clarity for engineering work, QA verification, and product validation.
+    applies_to:
+      - Requirement
+    evidence:
+      - Requirement record with acceptance criteria.
+      - Owner or delegated approval.
+      - Review notes where Engineer input should remain visible.
+    open_questions:
+      - What is the minimum acceptance criteria format?
+
+  - id: implementation_review
+    name: Implementation review
+    purpose: Ensure engineering output is reviewed before QA verification.
+    applies_to:
+      - Task
+      - Change
+    evidence:
+      - Pull request, commit, or task review notes.
+      - Engineer approval or review outcome.
+    open_questions:
+      - Can Codex-generated changes be accepted by automated checks alone?
+
+  - id: qa_verification_evidence
+    name: QA verification evidence
+    purpose: Preserve verification results against requirements and acceptance criteria.
+    applies_to:
+      - Requirement
+      - Task
+      - Change
+    evidence:
+      - Test plan or verification notes.
+      - Pass, fail, or retest outcome.
+      - Defects or follow-up tasks where needed.
+    open_questions:
+      - Which changes require formal QA evidence?
+
+  - id: product_validation
+    name: Product validation
+    purpose: Confirm the verified output is the right product outcome.
+    applies_to:
+      - Requirement
+      - Release
+    evidence:
+      - Product validation note.
+      - Owner approval or user input where required.
+    open_questions:
+      - Is product validation required before every release?
+
+  - id: release_readiness
+    name: Release readiness
+    purpose: Confirm change type, scope, risk, rollback, notice, veto, and required evidence before release.
+    applies_to:
+      - Change
+      - Release
+    evidence:
+      - Change record with baseline plan sections.
+      - Append-only Change events for notice, veto, emergency, decision, result, recovery, notes, or revisions where applicable.
+      - Release checklist.
+      - Linked QA and product validation evidence.
+      - Rollback or mitigation notes.
+    open_questions:
+      - Who owns release approval?
+
+  - id: deployment_record
+    name: Deployment record
+    purpose: Preserve when, where, and how a release was deployed.
+    applies_to:
+      - Deployment
+    evidence:
+      - Deployment identifier or URL.
+      - Environment.
+      - Timestamp.
+      - Operator or automation identity.
+    open_questions:
+      - Which deployment evidence is automatically available?
+
+  - id: service_impact_response_evidence
+    name: Service-impact response evidence
+    purpose: Preserve response details for service-impacting events through Incident entries.
+    applies_to:
+      - DX Complete Ticket
+      - Risk
+      - Task
+      - Change
+      - Decision
+    evidence:
+      - Timeline.
+      - Impact.
+      - Actions taken.
+      - Resolution and follow-up links.
+    open_questions:
+      - Which service-impact signals should later become Incident records if Incident is promoted?

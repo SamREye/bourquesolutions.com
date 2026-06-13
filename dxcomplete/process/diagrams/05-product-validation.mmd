@@ -1,0 +1,12 @@
+%% DX Complete product validation workflow.
+flowchart TD
+  QAEvidence[QA evidence] --> ProductReview[Owner reviews outcome]
+  ProductReview --> Outcome{Right outcome?}
+  Outcome -->|Yes| ValidationEvidence[Record validation evidence]
+  Outcome -->|No| FollowUpRequirement[Create or revise Requirement]
+  Outcome -->|Needs end user input| ClientReview[End User review]
+  ClientReview --> ClientOutcome{Accepted?}
+  ClientOutcome -->|Yes| ValidationEvidence
+  ClientOutcome -->|No| FollowUpRequirement
+  ValidationEvidence --> ReleaseCandidate[Release candidate]
+  FollowUpRequirement --> ProductDefinition[Product definition]

@@ -1,0 +1,16 @@
+%% DX Complete deployment and operations workflow.
+flowchart TD
+  DeploymentPrep[Deployment preparation] --> Deploy[Deploy release]
+  Deploy --> Record[Record Deployment evidence]
+  Record --> Registry[Update Environment and Component records if inventory changed]
+  Registry --> Monitor[Monitor service health]
+  Monitor --> Healthy{Healthy?}
+  Healthy -->|Yes| Operate[Operate service]
+  Healthy -->|No| ServiceSignal[Record service-impact signal]
+  ServiceSignal --> Response[Operator response]
+  Response --> Rollback{Rollback needed?}
+  Rollback -->|Yes| RollbackAction[Rollback or mitigation]
+  Rollback -->|No| ContinueMonitor[Continue monitoring]
+  RollbackAction --> Record
+  ContinueMonitor --> Monitor
+  Operate --> SupportSignals[Route user-facing signals to Support Agent]

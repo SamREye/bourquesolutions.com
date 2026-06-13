@@ -1,0 +1,53 @@
+schema: dxcomplete.decision_basis.v0
+status: current
+notes:
+  - Decision basis is first-class, but it is assembled from deliberate records rather than a standalone extra record.
+  - Use Estimate for cost, Benefits for expected value, and Decision entries for rationale where a separate decision trail is useful.
+  - Cost visibility is mandatory, but complete cost data is not mandatory.
+
+decision_basis_rules:
+  cost_visibility_required: true
+  complete_cost_data_required: false
+  current_state_context_attempt_required: true
+  estimate_generated_by_default: true
+  actuals_block_closure: false
+  supports_workspace_modes:
+    - transformation
+    - greenfield
+    - limited-disclosure
+
+decision_basis:
+  id: null
+  workspace_id: null
+  status: current
+  problem_to_be_solved: null
+  goal: null
+  workspace_mode: null
+  estimate_id: null
+  benefits_id: null
+  decision_id: null
+  decision_basis_summary: null
+  weigh_outcome: null # commitment | deferral
+  decision_rationale:
+    decision_entries: []
+    argument_entries: []
+    note_entries: []
+  elicited_needs: []
+  downstream_requirement_ids: []
+  measurement_plan:
+    intended_observations: []
+    notes: null
+  assumptions: []
+  unavailable_data: []
+  limited_disclosure_notes: []
+
+statuses:
+  - draft
+  - awaiting_current_state_context
+  - awaiting_estimate
+  - awaiting_benefits
+  - ready_for_decision
+  - commitment_recorded
+  - deferral_recorded
+  - measuring_actuals
+  - closed

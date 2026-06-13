@@ -1,0 +1,16 @@
+%% DX Complete risk and control management workflow.
+flowchart TD
+  RiskSignal[Risk signal] --> Risk[Create Risk ledger]
+  Risk --> Identify[Append identified entry]
+  Identify --> Assess[Append assessment entry]
+  Assess --> Treatment{Treatment}
+  Treatment -->|Accept| Owner[Owner formal acceptance]
+  Owner --> Decision[Record acceptance decision]
+  Decision -. informed_by .-> Risk
+  Treatment -->|Mitigate| Control[Append treatment entry]
+  Treatment -->|Avoid or defer| Requirement[Create or revise Requirement]
+  Control --> EvidenceNeed[Define evidence need]
+  EvidenceNeed --> LinkedObjects[Link Requirement / Release / Deployment]
+  LinkedObjects --> Review[Review control evidence]
+  Requirement --> ProductDefinition[Product definition]
+  Decision --> Review

@@ -1,0 +1,71 @@
+schema: dxcomplete.cost_model.v0
+status: current
+notes:
+  - Use broad cost language at the top level.
+  - OPEX/CAPEX-like categories can exist inside the cost model, but should not be the top-level frame.
+  - Current-state context, Estimate, Benefits, and post-launch observations are distinct concepts.
+
+cost_visibility_rules:
+  visibility_required: true
+  complete_data_required: false
+  current_state_context_attempt_required: true
+  estimate_required_by_default: true
+  actuals_required_when_available: true
+  missing_actuals_block_closure: false
+
+cost_data_availability:
+  - known
+  - estimated
+  - partial
+  - unavailable
+  - undisclosed
+  - not_applicable
+
+cost_objects:
+  estimate:
+    purpose: Itemized cost information for the scope being weighed.
+    generated_by_default: true
+    fields:
+      - line_items
+      - covered_requirements
+      - covered_expectations
+      - rollup_by_currency_timing_and_period
+      - assumptions
+      - confidence
+      - notes
+    rules:
+      - Estimate line items are cost items.
+      - One-time and recurring totals should remain separate.
+      - Recurring totals should remain separated by period.
+      - Edits should preserve prior versions.
+
+  benefits:
+    purpose: Expected benefit information for the scope being weighed.
+    fields:
+      - benefit_items
+      - covered_requirements
+      - covered_expectations
+      - quantified_rollup_by_currency_timing_and_period
+      - assumptions
+      - confidence
+      - notes
+    rules:
+      - Benefit items may be quantified or qualitative.
+      - Qualitative benefit items are complete without amount, timing, period, or currency.
+      - Quantified one-time and recurring totals should remain separate.
+      - Quantified recurring totals should remain separated by period.
+      - Edits should preserve prior versions.
+
+example_cost_categories:
+  - build_labor
+  - codex_assisted_implementation
+  - qa_and_validation
+  - infrastructure
+  - licenses_and_tools
+  - migration
+  - training_and_adoption
+  - support_load
+  - operational_run_cost
+  - maintenance
+  - risk_mitigation
+  - decommissioning_or_replacement

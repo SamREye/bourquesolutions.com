@@ -1,0 +1,651 @@
+schema: dxcomplete.taxonomy.v0
+status: current
+notes:
+  - This taxonomy is editable workspace process data.
+  - Object names, boundaries, and relationships should be updated when the workspace process changes.
+
+current_lifecycle_model:
+  runtime_scope_object: Workspace
+  queue_ticket_object: DX Complete Ticket
+  current_runtime_record_objects:
+    - Workspace
+    - DX Complete Ticket
+    - Statement
+    - Journal
+    - Dev Log
+    - Environment
+    - Component
+    - Maintenance Schedule
+    - Expectation
+    - Requirement
+    - Estimate
+    - Benefits
+    - Value Realization
+    - Commitment
+    - Deferral
+    - Task
+    - Change
+    - Incident
+    - Problem
+    - Support Request
+    - Decision
+    - Risk
+  upstream_decision_basis_objects:
+    - Statement
+    - Expectation
+    - Requirement
+    - Estimate
+    - Benefits
+    - Value Realization
+    - Decision
+  lifecycle_concepts_not_runtime_records:
+    - Feedback
+    - Authoritative Request
+    - Feature Request
+    - Release
+    - Deployment
+    - Control
+    - Evidence
+    - Estimate Refinement
+  possible_primary_object: Requirement
+  requirement_detail_location: Requirement fields
+  cross_cutting_execution_object: Task
+  coder_primary_work_object: Task
+  codex_assistance_primary_work_object: Task
+  downstream_measurement_objects: []
+  caution: Do not treat this lifecycle shape as final.
+
+objects:
+  - id: workspace
+    name: Workspace
+    definition: The shared-runtime container for one service scope.
+    fields:
+      - name
+      - summary
+      - mode
+    rules:
+      - Workspace is the boundary for statements, decisions, requirements, tasks, risks, cost, benefit, and operations records.
+      - A required company-to-project parent hierarchy is not part of the first model.
+      - Company, client, or related-service grouping can be represented later through tags or relationships.
+      - Shared database storage is the default runtime design target.
+      - Workspace mode may be transformation, greenfield, or limited-disclosure when that distinction is useful.
+    possible_links:
+      - Decision
+
+  - id: dxcomplete_ticket
+    name: DX Complete Ticket
+    definition: A ticket that stays in the workspace where it was filed and is used to raise a question, report, request, correction, or follow-up with DX Complete.
+    fields:
+      - title
+      - submitter_actor
+      - entries
+      - current_status
+    rules:
+      - The submitter and internal users can see the ticket.
+      - Unrelated End Users cannot see the ticket.
+      - The durable content is the title plus entries.
+      - Summary is optional and is not generated automatically.
+      - DX Complete replies can be tracked as unread or read by the submitting actor.
+      - DX Complete Tickets do not ingest files or assets.
+      - DX Complete Tickets do not automatically become requirements, tasks, incidents, decisions, or risks.
+      - DX Complete internal support can see DX Complete Tickets across origin workspaces.
+      - Follow-up should be appended so earlier entries are preserved.
+      - Open, resolved, or reopened status comes from status-bearing entries.
+    possible_links:
+      - Requirement
+      - Task
+      - Decision
+      - Risk
+      - Support Request
+
+  - id: journal
+    name: Journal
+    definition: Shared workspace notes for relevant context that does not have a better dedicated record home.
+    fields:
+      - body
+      - kind
+      - tag
+      - author
+      - created_at
+      - covers
+      - archived_at
+    rules:
+      - Journal is shared across workspace members, not private to the person who entered it.
+      - Journal entries are append-only; corrections and updates should be added as new entries.
+      - Dedicated containers come first. Use Statement, Expectation, Requirement, Decision, Risk, Change, Task, Environment, or Component when the information belongs there.
+      - Journal is the fallback for relevant background, preferences, observations, and context that has no dedicated home.
+      - If another record will reference or depend on the information, prefer a dedicated record instead of Journal.
+      - Operational infrastructure state belongs in the Operational Registry through Environment and Component records.
+      - Journal content that becomes load-bearing should be promoted to the appropriate dedicated record.
+      - Summary entries can compact older notes while pointing back to the covered entry IDs.
+      - Covered notes can be archived out of the default read without being deleted.
+      - Journal entries can be linked when they inform another record.
+    possible_links:
+      - Decision
+      - Risk
+      - Requirement
+      - Task
+
+  - id: dev_log
+    name: Dev Log
+    definition: Internal code-history context for workspace repository commits.
+    fields:
+      - commit_hash
+      - message
+      - author
+      - committed_at
+      - branch
+      - kind
+      - covers
+      - archived_at
+    rules:
+      - Dev Log is internal-only.
+      - Dev Log mirrors the workspace repository commit stream.
+      - One workspace has one repository source for Dev Log.
+      - Commit entries are append-only and keyed by commit hash.
+      - Duplicate commit hashes are skipped.
+      - Summary entries can compact older commits while pointing back to covered entry IDs.
+      - Change commit references can match Dev Log entries by hash when both are present.
+      - DX Complete records commit data as provided and does not validate it against a Git host.
+    possible_links:
+      - Change
+
+  - id: environment
+    name: Environment
+    definition: A named operating context such as local, staging, or production.
+    fields:
+      - name
+      - summary
+      - description
+      - version_history
+    rules:
+      - Environment records separate one operating context from another.
+      - Environment edits should preserve prior versions.
+      - Environment is inventory context, not monitoring or diagnostics.
+    possible_links:
+      - Component
+      - Change
+      - Decision
+
+  - id: component
+    name: Component
+    definition: One operational item that belongs to exactly one Environment.
+    fields:
+      - name
+      - environment
+      - kind
+      - locator
+      - identifiers
+      - secret_pointers
+      - notes
+      - version_history
+    rules:
+      - Component kind is a free-text label.
+      - Locator holds endpoint or location details.
+      - Identifiers hold non-secret names such as database name, account, project, region, or username.
+      - Secret pointers name where a secret is stored and what it is called; they must not contain secret values.
+      - Components do not embed service events or process history.
+      - Component edits should preserve prior versions.
+    possible_links:
+      - Environment
+      - Change
+      - Decision
+      - Risk
+
+  - id: maintenance_schedule
+    name: Maintenance Schedule
+    definition: A recurring operational hygiene record with cadence, start date, rationale, and derived due state.
+    fields:
+      - name
+      - kind
+      - cadence
+      - start_date
+      - rationale
+      - notes
+      - version_history
+    rules:
+      - Maintenance Schedule is for recurring service hygiene, not one-off work.
+      - Due state is derived from cadence and linked completed Changes or Tasks.
+      - Maintenance Schedule edits should preserve prior versions.
+    possible_links:
+      - Change
+      - Task
+      - Decision
+
+  - id: estimate
+    name: Estimate
+    definition: An itemized cost record used during Weigh, linked to the requirements or expectations it covers.
+    rules:
+      - Estimate line items are cost items.
+      - Amounts may be single values or min/expected/max ranges.
+      - One-time and recurring totals should remain separate.
+      - Recurring totals should remain separated by period.
+      - Estimate edits should preserve prior versions.
+    possible_links:
+      - Requirement
+      - Expectation
+      - Commitment
+      - Decision
+
+  - id: benefits
+    name: Benefits
+    definition: An Owner-authored benefit record used during Weigh, linked to the requirements or expectations it covers.
+    rules:
+      - Benefit items may be quantified or qualitative.
+      - Qualitative benefit items are complete without amount, timing, period, or currency.
+      - Quantified amounts may be single values or min/expected/max ranges.
+      - Quantified one-time and recurring totals should remain separate.
+      - Quantified recurring totals should remain separated by period.
+      - Benefits edits should preserve prior versions.
+    possible_links:
+      - Requirement
+      - Expectation
+      - Commitment
+      - Decision
+
+  - id: value_realization
+    name: Value Realization
+    definition: A measured before-and-after value record for expectations, requirements, or commitments.
+    rules:
+      - Value Realization metrics have a baseline, unit, direction, and optional actual value.
+      - Metrics without actual values remain open.
+      - Comparisons are derived from baseline and actual values.
+      - Value Realization edits should preserve prior versions.
+    possible_links:
+      - Expectation
+      - Requirement
+      - Commitment
+      - Decision
+
+  - id: feedback
+    name: Feedback
+    status: lifecycle_concept
+    definition: A signal from a client, user, interested party, or service observation.
+    likely_sources:
+      - End User
+      - Support Agent
+      - Owner
+      - Operator
+    possible_links:
+      - Feature Request
+      - Requirement
+      - Problem
+
+  - id: authoritative_request
+    name: Authoritative Request
+    status: lifecycle_concept
+    definition: A request or directive with authority behind it, such as Owner commitment, leadership decision, legal need, or contractual obligation.
+    likely_sources:
+      - Owner
+    possible_links:
+      - Requirement
+      - Decision
+      - Risk
+
+  - id: feature_request
+    name: Feature Request
+    status: lifecycle_concept
+    definition: A desired capability or product change that may become one or more requirements.
+    likely_sources:
+      - Feedback
+      - Owner
+      - Support Agent
+    possible_links:
+      - Requirement
+      - Decision
+
+  - id: statement
+    name: Statement
+    definition: The user's own words before DX Complete interprets or translates them.
+    status: runtime_record
+    runtime_collection: statements
+    notes:
+      - Statement is the traceable root for an expectation when the source wording should be preserved.
+      - Preserve the original expression before restating it as an expectation.
+      - Version history should preserve prior wording when the statement changes.
+    possible_links:
+      - DX Complete Ticket
+      - Expectation
+      - Decision
+
+  - id: expectation
+    name: Expectation
+    definition: User-facing condition of satisfaction, including the result expected and how success will be recognized.
+    status: runtime_record
+    runtime_collection: expectations
+    notes:
+      - Expectation should be tracked as a workspace-scoped record and linked to the requirements meant to satisfy it.
+      - The MCP client should confirm wording before recording Statement or Expectation on a user's behalf.
+      - Missing approval should not block progress by itself.
+      - Moving forward without approval should leave the open risk visible.
+      - Review notes can preserve Engineer input without creating a block or approval duty.
+      - Version history should preserve prior wording when the expectation changes.
+    possible_links:
+      - Statement
+      - Requirement
+      - Risk
+      - Decision
+
+  - id: requirement
+    name: Requirement
+    definition: A team-owned commitment that translates expectations into something buildable and verifiable. In the current model, requirements are shaped during elicitation, weighed by the Owner, and refined during Build once covered by a Commitment.
+    likely_sources:
+      - Owner
+      - Expectation
+      - Authoritative Request
+      - Feature Request
+      - Problem
+    fields:
+      - statement
+      - acceptance_criteria
+      - requirement_detail
+      - review_notes
+      - version_history
+    possible_links:
+      - Expectation
+      - Task
+      - Risk
+      - Control
+      - Decision
+    notes:
+      - A separate technical detail object is not part of the current model.
+      - Implementation and verification detail should live in requirement_detail until an independent object is proven necessary.
+      - Review notes can preserve Engineer input without creating a block or approval duty.
+      - Version history should preserve prior wording when the requirement changes.
+
+  - id: commitment
+    name: Commitment
+    definition: An Owner point-in-time authority record that commits requirements or expectations into Build.
+    likely_sources:
+      - Owner
+      - Requirement
+      - Expectation
+    fields:
+      - commitment_statement
+      - reservations
+    possible_links:
+      - Requirement
+      - Expectation
+      - Deferral
+      - Estimate
+      - Benefits
+      - Decision
+    notes:
+      - Reservations record concerns the Owner is moving forward despite.
+      - Commitment is a point-in-time act, not a process.
+
+  - id: deferral
+    name: Deferral
+    definition: An Owner record for not committing yet, with explicit conditions that make a future Commitment possible.
+    likely_sources:
+      - Owner
+      - Requirement
+      - Expectation
+    fields:
+      - reason
+      - status
+      - conditions
+      - condition_events
+    possible_links:
+      - Requirement
+      - Expectation
+      - Commitment
+      - Estimate
+      - Benefits
+      - Decision
+    notes:
+      - Deferral is a process or loop, not a point-in-time act.
+      - Conditions should have directly readable state plus append-only history.
+      - A resolved Deferral should link to the Commitment it produced.
+
+  - id: task
+    name: Task
+    definition: An internal work-order record with append-only entries, used to make part of a requirement true or coordinate concrete work.
+    fields:
+      - description
+      - assigneeRole
+      - assignee
+      - assignor
+      - entries
+      - current_status
+    rules:
+      - Current status should derive from the latest status-change entry.
+      - Prior task comments, notes, and status changes should remain visible.
+      - Role assignment, named assignment, and assignor are optional.
+      - Unassigned tasks remain valid when responsibility is not settled.
+    likely_sources:
+      - Engineer
+      - Requirement
+    possible_links:
+      - Requirement
+      - Change
+      - Decision
+
+  - id: change
+    name: Change
+    definition: A discrete alteration to the running service, recorded for service-management control and accountability.
+    likely_sources:
+      - Task
+      - Engineer
+      - Operator
+      - Incident
+    fields:
+      - change_type
+      - change_plan
+      - execution_steps
+      - rollback_plan
+      - risk_impact
+      - impact_grade
+      - emergency_importance
+      - emergency_immediacy
+      - planned_for
+      - events
+    rules:
+      - Change is not a standing Operations Plan.
+      - DX Complete records the change; it does not perform or enforce the operation.
+      - The original plan sections should remain as the baseline.
+      - Risk and impact should include downstream impact where known: what else may be affected and what depends on what is changing.
+      - Change type is standard, normal, or emergency.
+      - Notice, veto, decision, result, recovery, notes, and plan revisions should be appended as immutable events.
+      - Result and recovery events may include optional Git commit references for each execution attempt or rollback; these are references only and should not require Git validation.
+      - Emergency changes should record both importance and immediacy where available; missing rationale remains visible.
+      - Owner or Engineer may record a veto, but the veto does not mechanically stop the Operator.
+    possible_links:
+      - Requirement
+      - Release
+      - Deployment
+      - Risk
+      - Component
+      - Incident
+      - Control
+
+  - id: incident
+    name: Incident
+    status: current_runtime_record
+    definition: A specific service-impacting or potentially service-impacting occurrence requiring response.
+    fields:
+      - description
+      - entries
+      - current_status
+      - current_severity
+    rules:
+      - Current status and severity derive from ordered entries.
+      - Use Incident for a specific occurrence, not for an underlying cause.
+      - Link affected Components with affects.
+    likely_sources:
+      - Operator
+      - Support Agent
+      - Monitoring
+      - End User
+    possible_links:
+      - Support Request
+      - Problem
+      - Change
+      - Component
+      - Risk
+
+  - id: problem
+    name: Problem
+    status: current_runtime_record
+    definition: An underlying or recurring cause evidenced by one or more incidents.
+    fields:
+      - description
+      - entries
+      - current_status
+      - current_root_cause
+    rules:
+      - Current status and root cause derive from ordered entries.
+      - Link incidents that evidence the problem with evidenced_by.
+      - Link affected Components with affects when useful.
+    likely_sources:
+      - Incident
+      - Support Request
+      - Operator
+      - Tester
+    possible_links:
+      - Requirement
+      - Risk
+      - Decision
+
+  - id: support_request
+    name: Support Request
+    status: current_runtime_record
+    definition: A support ledger for a user-facing reported experience, question, request, or issue.
+    fields:
+      - filer_actor
+      - reporter
+      - kind
+      - reported_experience
+      - entries
+      - current_status
+    rules:
+      - The filing End User and internal users can see the support request.
+      - Unrelated End Users cannot see the support request.
+      - Current status derives from ordered entries.
+      - Filer unread replies are tracked for the filing actor.
+      - Escalated support entries can link to an Incident, but the link is not required.
+      - Use DX Complete Ticket for communication with DX Complete, not shared support follow-up.
+    likely_sources:
+      - End User
+      - Support Agent
+    possible_links:
+      - Incident
+      - Problem
+      - Requirement
+
+  - id: release
+    name: Release
+    status: lifecycle_concept
+    definition: A grouped set of changes prepared for delivery.
+    likely_sources:
+      - Change
+      - Operator
+      - Owner
+    possible_links:
+      - Deployment
+      - Decision
+      - Control
+
+  - id: deployment
+    name: Deployment
+    status: lifecycle_concept
+    definition: The act and evidence of putting a release or change into an environment.
+    likely_sources:
+      - Release
+      - Operator
+    possible_links:
+      - Release
+      - Incident
+      - Evidence
+
+  - id: decision
+    name: Decision
+    definition: A revisitable choice record with ordered entries and links to the records that informed it.
+    fields:
+      - matter
+      - entries
+      - current_decision
+    rules:
+      - Current decision should derive from the latest decision entry.
+      - Later decision entries can supersede earlier ones without deleting them.
+      - Arguments, notes, and decision entries should remain ordered and attributed.
+      - Arguments considered should stay loose text unless the project needs a stronger evidence model.
+      - Do not assign numeric weights by default.
+      - DX Complete records the decision trail; it does not determine whether the decision is reasonable.
+      - Decision input links should use informed_by from the Decision to the records that informed it.
+    likely_sources:
+      - Owner
+      - Engineer
+      - Operator
+      - Tester
+    possible_links:
+      - Estimate
+      - Benefits
+      - Expectation
+      - Requirement
+      - Change
+      - Risk
+      - Decision
+
+  - id: resolution
+    name: Resolution
+    definition: A formal authority record. Pending records are Motions; passed records are Resolutions.
+    fields:
+      - motion
+      - entries
+      - current_status
+    rules:
+      - Standing comes from an Owner making or seconding the Motion.
+      - Owner self-second is valid.
+      - Passage requires unanimous current Owner votes.
+      - Later Owner votes supersede earlier votes only while the Motion is not terminal.
+      - Passed, failed, and withdrawn records are terminal; reversal requires another Resolution.
+      - A Resolution does not block other records or work.
+      - Use authorized_by links when another record should cite formal authority.
+      - Resolution records authority; Decision records a choice among alternatives; Commitment moves weighed scope into Build.
+    likely_sources:
+      - Owner
+      - Engineer
+      - Operator
+      - Tester
+      - Support Agent
+    possible_links:
+      - Decision
+      - Commitment
+      - Requirement
+      - Task
+      - Change
+      - Risk
+
+  - id: risk
+    name: Risk
+    definition: An uncertainty or exposure that could affect product, service, delivery, compliance, or operations.
+    rules:
+      - Open checkpoints should be represented as visible risk rather than blockers.
+      - Open risk should remain visible when work proceeds without approval.
+      - Formal risk acceptance should be recorded separately as an Owner decision.
+    likely_sources:
+      - Owner
+      - Engineer
+      - Tester
+      - Operator
+      - Support Agent
+    possible_links:
+      - Requirement
+      - Change
+      - Control
+      - Decision
+
+  - id: control
+    name: Control
+    status: lifecycle_concept
+    definition: A policy, check, approval, or evidence requirement used to manage risk or governance.
+    likely_sources:
+      - Owner
+      - Operator
+      - Tester
+    possible_links:
+      - Risk
+      - Release
+      - Deployment
+      - Evidence

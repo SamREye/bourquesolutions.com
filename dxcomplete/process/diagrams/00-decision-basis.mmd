@@ -1,0 +1,24 @@
+%% DX Complete diagram. Decision basis is upstream of Complete Engineering.
+flowchart LR
+  Workspace[Workspace] --> Statement[Capture User Statement]
+  Statement --> Expectation[Restate Expected Result]
+  Expectation --> Elicit[Elicit requirements, dependencies, and unknowns]
+  Elicit --> CurrentCostContext[Current Cost Context]
+  CurrentCostContext --> Estimate[Itemized Estimate]
+  Elicit --> Benefits[Benefits]
+  Estimate --> DecisionBasis[Decision Basis]
+  Benefits --> DecisionBasis
+  CurrentCostContext --> DecisionBasis
+  DecisionBasis --> Weigh{Weigh}
+  Weigh -. informed_by .-> DecisionBasis
+  Weigh -. informed_by .-> Estimate
+  Weigh -. informed_by .-> Benefits
+  Weigh -->|Commit| Commitment[Commitment]
+  Weigh -->|Defer| Deferral[Deferral]
+  Deferral -->|Conditions resolved| Commitment
+  Commitment --> Build[Build]
+  Build --> GoLive[Go Live]
+  GoLive --> Operate[Operate]
+  Operate --> Observations[Post-launch Observations]
+  Observations --> EstimateLearning[Estimate Refinement]
+  EstimateLearning -. informs .-> Estimate

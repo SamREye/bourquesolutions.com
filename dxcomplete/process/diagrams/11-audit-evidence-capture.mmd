@@ -1,0 +1,13 @@
+%% DX Complete audit and evidence capture workflow.
+flowchart TD
+  LifecycleObject[Requirement / Task / Change / Incident / Problem / Decision / Risk / Control] --> EvidenceNeed{Evidence needed?}
+  EvidenceNeed -->|No| Note[Record no evidence required decision if useful]
+  EvidenceNeed -->|Yes| Capture[Capture or link evidence]
+  Capture --> ResponsiblePerson[Record responsible person and timestamp]
+  ResponsiblePerson --> Review[Review completeness]
+  Review --> Complete{Complete?}
+  Complete -->|Yes| Preserve[Preserve evidence]
+  Complete -->|No| Gap[Record evidence gap]
+  Gap --> FollowUp[Assign follow-up]
+  Note --> Preserve
+  Preserve --> AuditTrail[Audit trail]

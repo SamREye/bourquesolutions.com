@@ -1,0 +1,20 @@
+%% DX Complete diagram. Revise when the workspace process changes.
+flowchart LR
+  Workspace[Workspace] --> Orient[Orient]
+  Workspace --> Journal[Journal]
+  Orient --> Statement[Statement]
+  Statement --> Expectation[Expectation]
+  Expectation --> Elicit[Elicit]
+  Elicit --> Estimate[Itemized Estimate]
+  Elicit --> Benefits[Benefits]
+  Estimate --> Weigh
+  Benefits --> Weigh
+  Elicit --> Weigh{Weigh}
+  Weigh -->|Commit| Commitment[Commitment]
+  Weigh -->|Defer| Deferral[Deferral]
+  Deferral -->|Conditions resolved| Commitment
+  Commitment --> Build[Build]
+  Build --> GoLive[Go Live]
+  GoLive --> Operate[Operate]
+  Operate --> Measure[Measure]
+  Measure --> FutureContext[Future estimate context]

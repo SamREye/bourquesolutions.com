@@ -1,0 +1,20 @@
+%% DX Complete intake and triage workflow.
+flowchart TD
+  Signal[Incoming signal] --> Source{Likely source?}
+  Source -->|Client or user| SupportSignal[Support Request candidate]
+  Source -->|Product idea| Feedback[Feedback candidate]
+  Source -->|Authority or commitment| AuthoritySignal[Authoritative Request candidate]
+  Source -->|Service health| ServiceImpact[Service-impact signal]
+  SupportSignal --> Triage[Triage]
+  Feedback --> Triage
+  AuthoritySignal --> Triage
+  ServiceImpact --> Triage
+  Triage --> OwnerRoute[Route to Owner]
+  Triage --> OpsRoute[Route to Operator]
+  Triage --> DecisionRoute[Route for authority decision]
+  ProductRoute --> RequirementCandidate[Requirement candidate]
+  OpsRoute --> ServiceFollowUp[Risk, Task, Change, or Decision candidate]
+  DecisionRoute --> Decision[Decision or priority]
+  RequirementCandidate --> OpenQuestions[Capture open questions]
+  ServiceFollowUp --> OpenQuestions
+  Decision --> OpenQuestions
