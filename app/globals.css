@@ -247,7 +247,7 @@ li {
 .hero-copy h1 {
   max-width: 10ch;
   font-family: var(--font-hero), sans-serif;
-  font-size: clamp(2.68rem, 6.4vw, 5.12rem);
+  font-size: clamp(1.88rem, 4.48vw, 3.58rem);
   font-weight: 600;
   line-height: 0.96;
   letter-spacing: 0;
@@ -605,7 +605,7 @@ li {
 
   .hero-copy h1 {
     max-width: 11ch;
-    font-size: clamp(2.32rem, 12.8vw, 3.68rem);
+    font-size: clamp(1.62rem, 8.96vw, 2.58rem);
   }
 
   .hero-points {
